@@ -23,4 +23,4 @@ def search_specific_tournaments(tournaments_urls: List[str]) -> list[Optional[To
 
 def generate_html(tournaments: List[Tournament]) -> str:
     tables = "\n".join(generate_table(t) for t in tournaments)
-    return f"<html><body>\n{tables}\n</body></html>"
+    return f"\n{tables}\n"
