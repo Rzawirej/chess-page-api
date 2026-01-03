@@ -1,7 +1,10 @@
 import logging
 import os
+from datetime import datetime
 from typing import List, Optional
 from dotenv import load_dotenv
+from pytz import timezone
+
 from app.chessmanager import get_tournaments_with_players_of_club, get_tournament
 from app.decorators import log_execution_time
 from app.generate_html import generate_table
@@ -24,3 +27,7 @@ def search_specific_tournaments(tournaments_urls: List[str]) -> list[Optional[To
 def generate_html(tournaments: List[Tournament]) -> str:
     tables = "\n".join(generate_table(t) for t in tournaments)
     return f"\n{tables}\n"
+
+def get_polish_iso_time() -> str:
+    poland_tz = timezone("Europe/Warsaw")
+    return datetime.now(poland_tz).isoformat()

@@ -1,6 +1,8 @@
 import json
 import sqlite3
 from datetime import datetime, timedelta
+
+from app.helpers import get_polish_iso_time
 from app.models import Tournament, tournament_to_dict, dict_to_tournament
 
 DB_FILE = "data.db"
@@ -39,7 +41,7 @@ def save_tournaments(tournaments: list[Tournament]):
     conn = get_connection()
     c = conn.cursor()
 
-    now = datetime.utcnow().isoformat()
+    now = get_polish_iso_time()
     for t in tournaments:
         # Convert to dict manually, then to JSON string
         data_dict = tournament_to_dict(t)

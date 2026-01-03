@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from starlette.responses import HTMLResponse
 from apscheduler.schedulers.background import BackgroundScheduler
 import uvicorn
+from pytz import timezone
 
 from app.database import init_db, get_html_content, load_tournaments
 from app.tasks import update_data_task
@@ -16,8 +17,19 @@ async def lifespan(app: FastAPI):
     init_db()
 
     # 2. Start Scheduler
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(update_data_task, "interval", days=1)
+    poland_tz = timezone("Europe/Warsaw")
+
+    scheduler = BackgroundScheduler(timezone=poland_tz)
+
+    # Use "cron" instead of "interval"
+    scheduler.add_job(
+        update_data_task,
+        trigger="cron",
+        hour=22,
+        minute=0,
+        id="daily_update"
+    )
+
     scheduler.start()
 
     # 3. Run immediately on startup so data is available

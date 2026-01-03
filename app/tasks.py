@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from app.helpers import search_today, generate_html
+from app.helpers import search_today, generate_html, get_polish_iso_time
 from app.database import save_tournaments, load_tournaments, save_html_content
 
 
@@ -12,7 +10,7 @@ def update_data_task():
     3. Reloads all data
     4. Regenerates and saves HTML
     """
-    print("Running background task: update_data_task", datetime.utcnow().isoformat())
+    print("Running background task: update_data_task", get_polish_iso_time())
 
     # 1. Fetch new data
     today_tournaments = search_today()
@@ -27,4 +25,4 @@ def update_data_task():
     # 4. Generate and save HTML
     html = generate_html(stored_tournaments)
     save_html_content(html)
-    print("Background task complete: update_data_task", datetime.utcnow().isoformat())
+    print("Background task complete: update_data_task", get_polish_iso_time())
