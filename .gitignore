@@ -1,0 +1,10 @@
+# Ignore environment variable file
+.env
+# Ignore generated table
+table.html
+# Ignore Python cache files
+__pycache__/
+
+.idea/
+
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
