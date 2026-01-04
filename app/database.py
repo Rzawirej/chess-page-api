@@ -1,6 +1,5 @@
 import json
 import sqlite3
-from datetime import datetime, timedelta
 
 from app.helpers import get_polish_iso_time
 from app.models import Tournament, tournament_to_dict, dict_to_tournament
