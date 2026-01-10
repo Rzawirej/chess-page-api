@@ -24,7 +24,7 @@ def _format_player_row(player, group):
 
 def _format_group_header(group):
     player_type = "zawodniczek" if group.is_only_female else "zawodników"
-    return f'<tr style="background: #C0C0C0;">\n<td style="width: 100%; height: 10px;" colspan="5"><span style="color: #008000;"><a href="{group.url}"><strong>{group.name}</strong></a> ({group.players_number} {player_type})\n</span></td>\n</tr>'
+    return f'<tr style="background: #C0C0C0;">\n<td style="width: 100%; height: 10px;" colspan="5"><span style="color: #008000;"><a href="{group.url}"><strong>WYNIKI</strong></a> ({group.players_number} {player_type})\n</span></td>\n</tr>'
 
 
 def _generate_group_rows(tournament):
