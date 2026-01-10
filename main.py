@@ -1,4 +1,5 @@
 from threading import Thread
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from starlette.responses import HTMLResponse
@@ -13,6 +14,14 @@ async def lifespan(app: FastAPI):
     yield  # Application runs here
 
 app = FastAPI(lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware, # type: ignore[arg-type]
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 # --- Routes ---
